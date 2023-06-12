@@ -1,3 +1,22 @@
+# STAR Aligner
+STAR aligner is a software tool used to align high-throughput RNA-sequencing reads to a reference genome. In this case, a genome is to be generated and then each of  the reads are to be aligned to the generated genome.
+
+``` bash
+#load the module
+$ module load star/2.7.10a  
+
+#request an interactive node
+$ srun -c 4 --time=10:00:00 -N 1 --mem=32G -A BLUMBERG_LAB --pty /bin/bash -i
+
+#generating the human genome
+$ STAR --runThreadN 10 --runMode genomeGenerate --genomeDir /dfs8/pub/byukimti/reRun/genomeDirect/ --genomeFastaFiles Homo_sapiens.GRCh38.dna_sm.primary_assembly.fa --sjdbGTFfile Homo_sapiens.GRCh38.109.gtf --sjdbOverhang 99
+
+#aligning to the human genome
+$ STAR --runMode alignReads --genomeDir GenomeDir/ --outSAMtype BAM Unsorted SortedByCoordinate --readFilesCommand zcat --readFilesIn /dfs6/pub/byukimti/trimmedFiles/nR203-L1-G5-P305-CCGCTGTT-TGCGGTCT-READ1-Sequences.txt.gz_val_1.fq.gz /dfs6/pub/byukimti/trimmedFiles/nR203-L1-G5-P305-CCGCTGTT-TGCGGTCT-READ2-Sequences.txt.gz_val_2.fq.gz --runThreadN 10 --outFileNamePrefix /dfs6/pub/byukimti/alignGenome/finishedAligning/
+
+```
+
+
 # Rsubread
 Rsubread is an R package designed for analysis of RNA-seq data. In this case, the featureCounts function is being used in order to count the number of RNA-seq reads aligned to specific genomic features. 
 
