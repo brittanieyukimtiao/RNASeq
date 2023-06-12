@@ -120,7 +120,7 @@ baseComp$gene <- rownames(baseComp)
 baseComp <- baseComp %>% filter(expression != 0) 
 
 ```
-#Heatmaps
+# Heatmaps
 Heatmaps are visual representations of data, and represent patterns, relationships or trends in large data sets as a display matrix of colored cells. They are used to display gene expression patterns using colored cells. In this case, the heatmap is to be created in order to compare the differentially expressed genes between all provided conditions.
 
 ```r
