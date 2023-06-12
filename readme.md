@@ -134,6 +134,7 @@ res.ZIvsII <- glmQLFTest(fit_all, contrast=ZIvsII)
 res.ZIvsIO <- glmQLFTest(fit_all, contrast=ZIvsIO)
 res.IOvsII <- glmQLFTest(fit_all, contrast=IOvsII)
 
+#identifies whether genes are upregulated, downregulated or not expressed at all
 summary(decideTests(res.ZOvsIO))
 summary(decideTests(res.ZOvsZI))
 summary(decideTests(res.ZOvsII))
@@ -145,6 +146,7 @@ baseComp <- decideTests(res.ZOvsIO))
 baseComp <- as.data.frame(baseComp)
 colnames(baseComp) <- "expression"
 
+#removes genes which are not expressed from the list
 baseComp$gene <- rownames(baseComp)
 baseComp <- baseComp %>% filter(expression != 0) 
 
@@ -154,6 +156,10 @@ Heatmaps are visual representations of data, and represent patterns, relationshi
 
 ```r
 #install the reference genome and call the libraries
+
+Lets take this object and add it to our DGEListgroup_1 object as a data frame and then add on the ENTREZID as a new column
+
+
 BiocManager::install("Homo.sapiens")
 library("Homo.sapiens")
 BiocManager::install("org.Hs.eg.db")
@@ -217,6 +223,7 @@ rownames(mex.cpm.subset) = df.cpm.subset$Symbol
 colnames(mex.cpm.subset) = group_all
 colnames(mex.cpm.subset)
 
+#generates the heatmap
 install.packages("pheatmap")
 pdf("Heatmap_Final.pdf", width = 10, height = 10)
 pheatmap(mex.cpm.subset, 
