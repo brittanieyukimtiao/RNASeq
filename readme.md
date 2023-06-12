@@ -117,7 +117,6 @@ y_all <- estimateDisp(y_all, design_all, robust=TRUE)
 #QL dispersions
 fit_all <- glmQLFit(y_all, design_all, robust=TRUE)
 
-#differential expression analysis
 # left = treatment group, right = control group
 ZOvsIO_filtered <- makeContrasts(ZO - IO, levels=design_all)
 ZOvsII_filtered <- makeContrasts(ZO - II, levels=design_all)
@@ -158,16 +157,13 @@ Heatmaps are visual representations of data, and represent patterns, relationshi
 
 ```r
 #install the reference genome and call the libraries
-
-Lets take this object and add it to our DGEListgroup_1 object as a data frame and then add on the ENTREZID as a new column
-
-
 BiocManager::install("Homo.sapiens")
 library("Homo.sapiens")
 BiocManager::install("org.Hs.eg.db")
 library(org.Hs.eg.db)
 require(org.Hs.eg.db)
 
+#add the object to the DGEListgroup_1 object as a dataframe, and add ENTREZID as a new column
 GeneSymbol <- mapIds(org.Hs.eg.db, keys = rownames(y_all), keytype = "ENSEMBL", column = "ENTREZID")
 
 y_all$gene <- data.frame(ENTREZID = GeneSymbol)
