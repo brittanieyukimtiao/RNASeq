@@ -141,9 +141,11 @@ summary(decideTests(res.ZOvsII))
 summary(decideTests(res.ZIvsII))
 summary(decideTests(res.ZIvsIO))
 
+#assign results to a variable and turn it into a data frame
 baseComp <- decideTests(res.ZOvsIO))
-
 baseComp <- as.data.frame(baseComp)
+
+#change column names to expression
 colnames(baseComp) <- "expression"
 
 #removes genes which are not expressed from the list
