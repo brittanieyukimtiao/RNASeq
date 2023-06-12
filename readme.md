@@ -1,3 +1,13 @@
+# FastQC
+FastQC is an open source quality control (QC) tool used to assess the quality of high-throughput sequencing data. FastQC needs to be conducted in order to check the quality of provided files and to trim, or to remove any low quality bases which may be found on the provided files.
+
+``` bash
+$ srun -c 4 --time=10:00:00 -N 1 --mem=32G -A BLUMBERG_LAB --pty /bin/bash -i
+$ module load fastqc
+$ cd Z13_MSC_RNASeq / 
+$ fastqc -t 6 *.gz 
+```
+
 # STAR Aligner
 STAR aligner is a software tool used to align high-throughput RNA-sequencing reads to a reference genome. In this case, a genome is to be generated and then each of  the reads are to be aligned to the generated genome.
 
